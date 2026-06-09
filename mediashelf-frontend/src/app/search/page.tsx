@@ -6,7 +6,7 @@ export default function Searchpage() {
     const [results, setResults] = useState([])
     const [loading, setLoading] = useState(false)
     const [searched, setSearched] = useState(false)
-    const [error, setError] = useState(null)
+    const [error, setError] = useState<string | null>(null)
 
     
 
