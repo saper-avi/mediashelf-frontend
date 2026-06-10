@@ -24,15 +24,15 @@ async function handleSearch() {
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
         }
     })
-    .catch((error) => {
-        setError('Ошибка при поиске фильмов')
-        setLoading(false)
-    })
     .then((response) => response.json())
     .then((data) => {
         setResults(data.results)
         setLoading(false)
 
+    })
+    .catch((error) => {
+        setError('Ошибка при поиске фильмов')
+        setLoading(false)
     })
 }
 
