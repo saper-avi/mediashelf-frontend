@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "../components/NavBar/NavBar";
 import Image from "next/image";
 import Logo from "../components/logo";
+import MovieCard from "@/components/MovieCard/MovieCard"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

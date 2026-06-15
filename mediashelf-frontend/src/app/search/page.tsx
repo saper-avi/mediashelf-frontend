@@ -1,21 +1,18 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
+import MovieCard from '@/components/MovieCard/MovieCard'
 
 export default function Searchpage() {
+    const searchParams = useSearchParams()
     const [query, setQuery] = useState('')
     const [results, setResults] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
     const [searched, setSearched] = useState(false)
     const [error, setError] = useState<string | null>(null)
-
     
 
-
-
-
-
 async function handleSearch() {
-
     setSearched(true)
     setLoading(true)
 
@@ -26,7 +23,9 @@ async function handleSearch() {
     })
     .then((response) => response.json())
     .then((data) => {
-        setResults(data.results)
+        const filtered = data.results.filter((movie: any) => movie.poster_path)
+        const sorted = filtered.sort((a: any, b: any) => b.popularity - a.popularity)
+        setResults(sorted)
         setLoading(false)
 
     })
@@ -37,6 +36,23 @@ async function handleSearch() {
 }
 
 
+useEffect(() => {
+    const q = searchParams.get('q')
+    if (q) {
+        setQuery(q)
+    } else {
+        setQuery('')
+        setResults([])
+        setSearched(false)
+    }
+}, [searchParams.toString()])
+
+useEffect(() => {
+    if (query) {
+        handleSearch()
+    }
+}, [query])
+
   let emptyMessage = null
             if (!loading && results.length === 0) {
                 !loading && searched && (emptyMessage = <p>Ничего не найдено</p>)
@@ -46,24 +62,6 @@ async function handleSearch() {
 
     return (
         <div>
-            <h1>Поиск фильмов</h1>
-
-
-
-
-            <input placeholder="Введите название фильма..."
-            value = {query}
-            onChange = {(e) => setQuery(e.target.value)}></input>
-
-
-
-
-
-            <button onClick={handleSearch}>кнопка</button>
-
-
-
-
 
             {loading && <p>Загрузка...</p>}
             {error && <p>{error}</p>}
@@ -72,15 +70,12 @@ async function handleSearch() {
             {emptyMessage}
 
 
-            {results.map((movie) => (
-                <div key={movie.id}>
-                    <p>{movie.title}</p>
-                    </div> 
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4">
+                {results.map((movie) => (
+                    <MovieCard key={movie.id} movie={movie} />
+                ))}
+            </div>
 
-
-
-
-            ))}
         </div>
 
     )
