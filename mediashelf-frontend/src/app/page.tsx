@@ -12,7 +12,7 @@ export default async function Home() {
     <div className="mt-4 gray-900 rounded-xl p-4 overflow-x-auto">
 
       <div className="flex gap-4">
-        {movies.map((movie) => (
+        {movies.map((movie: any) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
