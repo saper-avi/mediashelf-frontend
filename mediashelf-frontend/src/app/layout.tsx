@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/NavBar/NavBar";
 import Image from "next/image";
+import Logo from "../components/logo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,11 +31,16 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <NavBar />
         <div className="relative w-full h-96">
-          <Image src="/Dune.jpg" alt="Dune" fill className="object-cover" />
+          <Image src="/Banner.png" alt="Banner" fill className="object-cover" />
           <div className="absolute inset-0 bg-black/50"></div>
-          <div className="absolute top-0 left-0 right-0">
-            <NavBar />
+          <div className="absolute bottom-28 left-12 max-w-md text-white">
+            <Logo />
+            
+            <p className="mt-4 text-sm text-gray-300">Твоя личная медиатека.
+Находи фильмы через удобный поиск, сохраняй в свой список и отслеживай что посмотрел, а что ещё в планах. Ставь оценки, оставляй заметки и возвращайся к своей коллекции в любое время.
+            </p>
           </div>
         </div>
         

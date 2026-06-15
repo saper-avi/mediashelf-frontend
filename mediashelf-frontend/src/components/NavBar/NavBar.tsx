@@ -1,7 +1,6 @@
 export default function NavBar() {
     return (
         <nav className="flex justify-between items-center p-4 text-white">
-            <p className="text-2xl font-bold">MediaShelf</p>
             <div className="flex gap-4">
                 <p className="cursor-pointer hover:text-teal-400">Главная</p>
                 <p className="cursor-pointer hover:text-teal-400">Избранные</p>
@@ -19,4 +18,4 @@ export default function NavBar() {
         
     )
 }
-
+ 
