@@ -33,9 +33,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <NavBar />
         <div className="relative w-full h-96">
-          <div className="fixed bottom-20 left-0 w-96 h-96 bg-blue-400/45 rounded-full blur-2xl pointer-events-zone z-0"></div>
-          <div className="fixed top-100 right-0 w-133 h-96 bg-blue-600/45 rounded-full blur-3xl pointer-events-zone z-0"></div>
-          <Image src="/Banner.png" alt="Banner" fill className="relative w-full h-96 mb-8 object-cover" />
+          <div className="fixed bottom-20 left-0 w-96 h-96 bg-blue-400/45 rounded-full blur-3xl pointer-events-none z-[-1]"></div>
+          <div className="fixed top-100 right-0 w-133 h-96 bg-blue-600/45 rounded-full blur-3xl pointer-events-none z-[-1]"></div>
+          <Image src="/Banner.png" alt="Banner" fill className="object-cover" />
           <div className="absolute inset-0 bg-black/50"></div>
         
           
@@ -47,8 +47,9 @@ export default function RootLayout({
             </p>
           </div>
         </div>
+          {children}
         
-        {children}
+        
       </body>
     </html>
   );

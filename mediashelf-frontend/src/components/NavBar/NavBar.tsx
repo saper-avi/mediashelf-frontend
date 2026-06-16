@@ -10,8 +10,9 @@ export default function NavBar() {
         router.push(`/search?q=${query}`)
     }
     return (
-        <nav className="flex justify-between items-center p-4 text-white">
-            <div className="flex gap-4">
+        <nav className=" text-white">
+            <div className="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+                <div className="flex gap-4">
                 <Link href="/" className="cursor-pointer hover:text-teal-400">Главная</Link>
                 <p className="cursor-pointer hover:text-teal-400">Избранные</p>
             </div>
@@ -27,9 +28,10 @@ export default function NavBar() {
         <button onClick={handleSearch} className="text-white">Поиск</button>
         </div>
 </div>
-
+</div>
 
         </nav>
+      
         
     )
 }
