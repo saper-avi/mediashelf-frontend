@@ -1,9 +1,9 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import MovieCard from '@/components/MovieCard/MovieCard'
 
-export default function Searchpage() {
+function SearchContent() {
     const searchParams = useSearchParams()
     const [query, setQuery] = useState('')
     const [results, setResults] = useState<any[]>([])
@@ -78,6 +78,14 @@ useEffect(() => {
 
         </div>
 
+    )
+}
+
+export default function Searchpage() {
+    return (
+        <Suspense fallback={<p>Загрузка...</p>}>
+            <SearchContent /> 
+        </Suspense>
     )
 }
 
