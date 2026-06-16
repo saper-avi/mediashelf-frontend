@@ -1,4 +1,5 @@
-import MovieCard from "@/components/MovieCard/MovieCard"
+
+import MovieCarousel from "@/components/MovieCarousel/MovieCarousel"
 
 export default async function Home() {
   const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=ru-RU`)
@@ -7,15 +8,12 @@ export default async function Home() {
       .filter((movie: any) => movie.poster_path)
       .sort((a: any, b: any) => b.popularity - a.popularity)
 
-
   return (
-    <div className="mt-4 gray-900 rounded-xl p-4 overflow-x-auto">
-
-      <div className="flex gap-4">
-        {movies.map((movie: any) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
+    <div className="mt-12 p-4">
+    
+        <h2 className="text-white text-2xl font-regular mb-4 text-center">Десятки тысяч фильмов, сериалов и мультфильмов</h2>
+      
+      <MovieCarousel movies={movies} />
     </div>
   )
 }

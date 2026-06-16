@@ -23,7 +23,9 @@ export default function NavBar() {
       onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
       className="bg-transparent outline-none text-white placeholder-gray-400"
       />
-      <button onClick={handleSearch} className="text-white">Поиск</button>
+      <div className="bg-blue-400 rounded-2xl mt-0 p-1"> 
+        <button onClick={handleSearch} className="text-white">Поиск</button>
+        </div>
 </div>
 
 
