@@ -10,13 +10,17 @@ function SearchContent() {
     const [loading, setLoading] = useState(false)
     const [searched, setSearched] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [page,setPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(0)
+
+    
     
 
 async function handleSearch() {
     setSearched(true)
     setLoading(true)
 
-    fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
+    fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&page=${page}&api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
         headers: {
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
         }
@@ -26,6 +30,7 @@ async function handleSearch() {
         const filtered = data.results.filter((movie: any) => movie.poster_path)
         const sorted = filtered.sort((a: any, b: any) => b.popularity - a.popularity)
         setResults(sorted)
+        setTotalPages(data.total_pages)
         setLoading(false)
 
     })
@@ -47,26 +52,26 @@ useEffect(() => {
     }
 }, [searchParams.toString()])
 
+
+    
 useEffect(() => {
     if (query) {
         handleSearch()
     }
-}, [query])
+}, [query, page])
 
-  let emptyMessage = null
+let emptyMessage = null
             if (!loading && results.length === 0) {
                 !loading && searched && (emptyMessage = <p>Ничего не найдено</p>)
             }
-    
-
 
     return (
+        
+
         <div>
 
             {loading && <p>Загрузка...</p>}
             {error && <p>{error}</p>}
-
-
             {emptyMessage}
 
 
@@ -76,10 +81,26 @@ useEffect(() => {
                 ))}
             </div>
 
+            <div className="flex justify-center gap-2 py-6">
+                {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => i + 1).map((p)=>(
+                    <button
+                        key={p}
+                        onClick={() => setPage(p)}
+                        className={`w-9 h-9 rounded-full text-sm ${page === p ? 'bg-cyan-400 text-black' : 'bg-white/10 text-white'}`}
+                        >
+                            {p}
+                        </button>
+                ))}
+                {totalPages > 7 && (
+                    <button onClick={() => setPage(p => p + 1)} disabled={page === totalPages} className="px-4 py-2 bg-white/10 rounded-full disabled:opacity-30">→</button>
+                )}
+            </div>
         </div>
 
     )
 }
+
+
 
 export default function Searchpage() {
     return (
@@ -88,5 +109,4 @@ export default function Searchpage() {
         </Suspense>
     )
 }
-
 

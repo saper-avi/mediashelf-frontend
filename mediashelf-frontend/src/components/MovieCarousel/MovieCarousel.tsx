@@ -18,7 +18,7 @@ export default function MovieCarousel({ movies }: { movies: any[] }) {
     return (
         <div className="relative">
             <button onClick={scrollLeft} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white p-2 rounded-full">←</button>
-            <div ref={carouselRef} className="flex overflow-x-auto gap-4 py-4">
+            <div ref={carouselRef} className="flex overflow-x-auto gap-4 py-4 scrollbar-hide">
                 {movies.map((movie: any) => (
                     <MovieCard key = {movie.id} movie={movie} />
                 ))}
