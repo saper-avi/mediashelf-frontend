@@ -17,6 +17,7 @@ function SearchContent() {
     
 
 async function handleSearch() {
+    window.scrollTo({ top: 0, behavior: 'smooth'})
     setSearched(true)
     setLoading(true)
 
@@ -60,10 +61,6 @@ useEffect(() => {
     }
 }, [query, page])
 
-let emptyMessage = null
-            if (!loading && results.length === 0) {
-                !loading && searched && (emptyMessage = <p>Ничего не найдено</p>)
-            }
 
     return (
         
@@ -72,7 +69,12 @@ let emptyMessage = null
 
             {loading && <p>Загрузка...</p>}
             {error && <p>{error}</p>}
-            {emptyMessage}
+            {!loading && searched && results.length === 0 && (
+                <div className="flex flex-col items-center justify-center py-32 text-center">
+                    <p className="text-white text-2xl font-semibold">Ничего не найдено</p>
+                    <p className="text-gray-400 mt-2 text-sm">Попробуйте другой запрос</p>
+                </div>
+            )}
 
 
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4">

@@ -44,12 +44,14 @@ export default function RootLayout({
           <div className="absolute bottom-28 left-12 max-w-md text-white">
             <Logo />
             
-            <p className="mt-4 text-sm text-gray-300">Твоя личная медиатека.
+            <p className="mt-4  text-sm text-gray-300">Твоя личная медиатека.
 Находи фильмы через удобный поиск, сохраняй в свой список и отслеживай что посмотрел, а что ещё в планах. Ставь оценки, оставляй заметки и возвращайся к своей коллекции в любое время.
             </p>
           </div>
         </div>
-          {children}
+          <div className="mb-8">
+            {children}
+          </div>
         
 <footer className="mt-auto border-t border-white/10 px-12 py-6 flex justify-between items-center text-sm text-gray-400">
     <div>
