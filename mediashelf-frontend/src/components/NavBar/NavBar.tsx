@@ -16,20 +16,23 @@ export default function NavBar() {
                 <Link href="/" className="cursor-pointer hover:text-teal-400">Главная</Link>
                 <p className="cursor-pointer hover:text-teal-400">Избранные</p>
             </div>
-            <div className = "flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
-<input 
-      placeholder="Поиск"
-      value={query}
-      onChange={(e) => setQuery(e.target.value)}
-      onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-      className="bg-transparent outline-none text-white placeholder-gray-400"
-      />
-      <div className="bg-blue-400 rounded-2xl mt-0 p-1"> 
-        <button onClick={handleSearch} className="text-white">Поиск</button>
+
+<div className="flex items-center gap-2">
+    <div className = "flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
+        <span className="text-gray-400">  </span>
+        <input 
+        placeholder="Поиск"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+        className="bg-transparent outline-none text-white placeholder-gray-400"
+        />
+    </div>
+    <div>
+        <button onClick={handleSearch} className="bg-cyan-500 text-white font-semibold rounded-full px-6 py-2">Поиск</button>
         </div>
 </div>
 </div>
-
         </nav>
       
         
