@@ -2,6 +2,8 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import MovieCard from '@/components/MovieCard/MovieCard'
+import Loader from '@/components/Loader/Loader'
+import ErrorMessage from '@/components/ErrorMessage/ErrorMesagge'
 
 function SearchContent() {
     const searchParams = useSearchParams()
@@ -67,8 +69,8 @@ useEffect(() => {
 
         <div>
 
-            {loading && <p>Загрузка...</p>}
-            {error && <p>{error}</p>}
+            {loading && <Loader />}
+            {error && <ErrorMessage message={error} />}
             {!loading && searched && results.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-32 text-center">
                     <p className="text-white text-2xl font-semibold">Ничего не найдено</p>
@@ -106,7 +108,7 @@ useEffect(() => {
 
 export default function Searchpage() {
     return (
-        <Suspense fallback={<p>Загрузка...</p>}>
+        <Suspense fallback={<Loader />}>
             <SearchContent /> 
         </Suspense>
     )
