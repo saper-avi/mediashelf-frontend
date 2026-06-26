@@ -30,7 +30,7 @@ async function handleSearch() {
     })
     .then((response) => response.json())
     .then((data) => {
-        const filtered = data.results.filter((movie: any) => movie.poster_path)
+        const filtered = data.results ?? [].filter((movie: any) => movie.poster_path)
         const sorted = filtered.sort((a: any, b: any) => b.popularity - a.popularity)
         setResults(sorted)
         setTotalPages(data.total_pages)
